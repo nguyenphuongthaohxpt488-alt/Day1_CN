@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Luyện nói Anh – Trung</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎤</text></svg>">
+<style>
+:root{--bg:#dfedf8;--card:#fff;--ink:#1d2b3a;--mute:#5a6f86;--blue:#3a62c9;--green:#3f8a52;--gdark:#2e6a3d;--org:#ae5424;--yel:#f7d55c;--line:#b8cbe0;--soft:#f3f7fc;--osoft:#fdf1e8;--gsoft:#e8f4ea;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15202c;--card:#1f2e3f;--ink:#eaf1f8;--mute:#9db3c8;--blue:#7da0f2;--green:#5bb571;--gdark:#8fd7a1;--org:#f0905a;--soft:#243649;--osoft:#3a2a22;--gsoft:#1f3a2a;--line:#3d5873}}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Baloo 2","Nunito","Segoe UI",system-ui,"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;min-height:100vh}
+#app{max-width:760px;margin:0 auto;padding:14px}
+.top{display:flex;align-items:center;gap:10px;justify-content:space-between;font-weight:700;color:var(--mute)}
+.dots{display:flex;gap:6px;flex:0 0 auto}.dots i{width:12px;height:12px;border-radius:9px;background:var(--line)}.dots i.on{width:34px;background:var(--blue)}.dots i.ok{background:var(--green)}
+.pill{background:var(--card);border-radius:30px;padding:8px 16px;font-weight:800;color:var(--ink)}
+.card{background:var(--card);border-radius:28px;padding:20px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center;justify-content:center}
+.pic{flex:1 1 220px;min-height:200px;border:2px dashed var(--line);border-radius:22px;background:var(--soft);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:84px;color:var(--mute)}
+.pic small{font-size:14px;font-weight:700}
+.side{flex:1 1 260px;text-align:center}
+.word{font-size:46px;font-weight:800;line-height:1.2}
+.tag{display:inline-block;background:var(--blue);color:#fff;border-radius:8px;font-size:13px;padding:2px 8px;vertical-align:middle;margin-right:6px}
+.ans{display:inline-flex;gap:8px;align-items:center;margin-top:12px}
+.lang{background:var(--yel);color:#1d2b3a;border-radius:30px;padding:10px 18px;font-size:26px;font-weight:800}
+.slot{min-width:92px;min-height:60px;border:2px dashed #c9a73a;border-radius:16px;padding:8px 14px;font-size:30px;font-weight:800;color:#8a6d12;display:flex;align-items:center;justify-content:center}
+.slot.f{border:3px solid var(--green);background:var(--gsoft);color:var(--ink)}.slot.o{border:3px dashed var(--org);background:var(--osoft);color:var(--ink)}
+.say{font-size:22px;font-weight:800;margin:6px 0}.g{color:var(--gdark)}.o{color:var(--org)}
+.py{font-size:16px;font-weight:700;color:var(--org)}
+.bar{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin:18px 0}
+.btn{font:inherit;font-weight:800;font-size:17px;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:40px;padding:12px 22px;cursor:pointer}
+.btn.go{background:var(--green);border-color:var(--green);color:#fff}.btn.or{border-color:var(--org);color:var(--org)}.btn.sm{font-size:14px;padding:8px 14px}
+.mic{width:96px;height:96px;border-radius:50%;border:10px solid rgba(174,84,36,.25);background:var(--org);color:#fff;font-size:36px;cursor:pointer;background-clip:padding-box}
+.mic.rec{animation:p 1s infinite}@keyframes p{50%{transform:scale(1.1)}}
+.cap{font-weight:800;margin-top:6px;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.it{background:var(--card);border-radius:22px;padding:14px;position:relative}.it b{font-size:26px}.it .st{position:absolute;right:14px;top:10px;font-size:26px}
+.tiles{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.tile{font:inherit;font-size:30px;font-weight:800;min-width:56px;padding:8px 14px;border-radius:14px;border:2px solid var(--blue);background:var(--card);color:var(--ink);cursor:pointer}.tile:disabled{opacity:.3}
+input{font:inherit;font-size:20px;padding:12px 16px;border-radius:30px;border:2px solid var(--line);background:var(--card);color:var(--ink);width:min(320px,100%);text-align:center}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card);border-radius:14px;display:block;overflow-x:auto}td,th{padding:8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+h1,h2{margin:8px 0}.c{text-align:center}.mute{color:var(--mute);font-size:14px}
+</style></head><body><div id="app"></div>
+<script>
+const ITEMS=[
+{pic:'🏫',cap:'Tranh trường học',show:'school',sl:'en',say:'学校',tl:'zh-CN',py:'xuéxiào',ok:['学校','學校','学效','下校','学小','学较','学孝']},
+{pic:'🏠',cap:'Tranh ngôi nhà',show:'家',sl:'zh',spy:'jiā',say:'home',tl:'en-US',ok:['home','hom','hoam','whom','ome','homes','hoom','hum','hone']},
+{pic:'🏪',cap:'Tranh cửa hàng',show:'shop',sl:'en',say:'商店',tl:'zh-CN',py:'shāngdiàn',ok:['商店','商点','上店','商殿','商电','伤店','商底']},
+{pic:'🌳',cap:'Tranh công viên',show:'公园',sl:'zh',spy:'gōngyuán',say:'park',tl:'en-US',ok:['park','pak','parks','pack','bark','pah','parc','pork']},
+{pic:'🍽️',cap:'Tranh nhà hàng',show:'restaurant',sl:'en',say:'饭店',tl:'zh-CN',py:'fàndiàn',ok:['饭店','飯店','饭点','犯店','反店','饭殿','饭电','范店']},
+{pic:'🦁',cap:'Tranh sở thú',show:'动物园',sl:'zh',spy:'dòngwùyuán',say:'zoo',tl:'en-US',ok:['zoo','zu','zoom','zoos','zou','200','sue','zoe']}];
+const K='lnAnhTrung_v2',$=s=>document.getElementById(s),MAXT=3;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let db;try{db=JSON.parse(localStorage.getItem(K))}catch(e){}
+db=db||{child:'',logs:[],sess:[]};
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(db))}catch(e){try{db.logs.forEach(l=>l.audio='');localStorage.setItem(K,JSON.stringify(db))}catch(_){}}};
+let S={scr:'start',i:0,att:1,ph:'ask',res:[],tiles:[],pick:[],stop:null,msg:'',sid:''},DB=null,USER=null,UID='';
+let ISADMIN=false;
+(async()=>{try{if(window.claude){DB=await claude.use('db');USER=await claude.use('user');if(USER){UID=String(await USER.id());ISADMIN=!!(await USER.canEdit());if(ISADMIN&&(S.scr==='start'||S.scr==='sum'))draw()}}}catch(e){}})();
+const cloud=(col,rec)=>{try{if(DB)DB.collection(col).doc(rec.id).set(rec).catch(()=>{})}catch(e){}};
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+function speakQ(arr){try{speechSynthesis.cancel();arr.forEach(([t,l])=>{const u=new SpeechSynthesisUtterance(t);u.lang=l;u.rate=.85;speechSynthesis.speak(u)})}catch(e){}}
+const speak=(t,l)=>speakQ([[t,l]]);
+let MIC=null,AC=null;
+async function getMic(){if(MIC&&MIC.active)return MIC;try{MIC=await navigator.mediaDevices.getUserMedia({audio:true});try{localStorage.setItem('micOK','1')}catch(e){}}catch(e){MIC=null}return MIC}
+function ctx(){AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();return AC}
+function sad(cb){try{const c=ctx(),t=c.currentTime;[[392,0],[330,.3],[262,.6]].forEach(([f,d])=>{const o=c.createOscillator(),g=c.createGain();o.type='triangle';o.frequency.setValueAtTime(f,t+d);o.frequency.linearRampToValueAtTime(f*.92,t+d+.27);g.gain.setValueAtTime(.0001,t+d);g.gain.exponentialRampToValueAtTime(.3,t+d+.03);g.gain.exponentialRampToValueAtTime(.0001,t+d+.32);o.connect(g);g.connect(c.destination);o.start(t+d);o.stop(t+d+.34)})}catch(e){}setTimeout(cb,1050)}
+const norm=s=>s.toLowerCase().replace(/[^a-z\u4e00-\u9fff]/g,'');
+const ed=(a,b)=>{const d=[];for(let i=0;i<=a.length;i++){d[i]=[i];for(let j=1;j<=b.length;j++)d[i][j]=i?0:j}for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]};
+const NZ=s=>s.replace(/ph/g,'f').replace(/ck/g,'k').replace(/[cqg]/g,'k').replace(/z/g,'s').replace(/b/g,'p').replace(/d/g,'t').replace(/v/g,'f').replace(/w/g,'u').replace(/y/g,'i').replace(/h$/,'').replace(/(.)\1+/g,'$1');
+const PY={};'xue:学雪血削穴靴;xiao:校小笑效消晓销孝肖;shang:商上伤尚赏;dian:店点电殿垫典颠;fan:饭反翻范犯烦凡返泛'.split(';').forEach(g=>{const[s,c]=g.split(':');[...c].forEach(ch=>PY[ch]=s)});
+const plain=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const match=(texts,it)=>texts.some(t=>{
+ if(it.tl==='zh-CN'){const n=norm(t),w=[...it.ok[0]],lat=plain(t);if(it.ok.some(k=>n.includes(k)))return true;
+  const hit=w.filter(c=>n.includes(c)||[...n].some(x=>PY[x]&&PY[x]===PY[c])||(PY[c]&&lat.includes(PY[c]))).length;return hit>=Math.ceil(w.length/2)}
+ const toks=t.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean),cand=toks.concat(toks.length>1?[toks.join('')]:[]);
+ return cand.some(x=>it.ok.some(k=>{if(x===k||x.startsWith(k))return true;const a=NZ(x),b=NZ(k);if(a===b)return true;const lim=k.length>=4?2:1;return a.length>=2&&ed(a,b)<=lim&&(lim===1||a[0]===b[0]||a.slice(-1)===b.slice(-1))}))});
+const toData=b=>new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result);f.onerror=()=>r('');f.readAsDataURL(b)});
+async function listen(lang){
+ let stream=null,rec=null,chunks=[];
+ const recP=(async()=>{try{stream=await getMic();if(stream&&window.MediaRecorder){rec=new MediaRecorder(stream);rec.ondataavailable=e=>chunks.push(e.data);rec.start()}}catch(e){}})();
+ return new Promise(res=>{
+  let texts=[],done=false,sr=null,t,bad=false;
+  const finish=()=>{if(done)return;done=true;clearTimeout(t);try{sr&&sr.stop()}catch(e){}
+   const out=async()=>{let a='';try{if(chunks.length)a=await toData(new Blob(chunks,{type:rec.mimeType}))}catch(e){}res({texts,audio:a,sr:!!SR&&!(bad&&!texts.length)})};
+   recP.then(()=>{if(rec&&rec.state!=='inactive'){rec.onstop=out;try{rec.stop()}catch(e){out()}}else out()})};
+  S.stop=()=>{try{sr?sr.stop():finish()}catch(e){finish()}setTimeout(finish,1200)};
+  t=setTimeout(()=>{try{sr&&sr.stop()}catch(e){}setTimeout(finish,800)},5000);
+  if(SR){try{sr=new SR();sr.lang=lang;sr.maxAlternatives=10;
+   sr.onresult=e=>{for(let i=0;i<e.results.length;i++)for(let j=0;j<e.results[i].length;j++)texts.push(e.results[i][j].transcript);finish()};
+   sr.onerror=e=>{if(e.error!=='no-speech'&&e.error!=='aborted')bad=true;finish()};sr.onend=finish;sr.start()}catch(e){bad=true;finish()}}
+ });}
+function log(it,level,text,audio){const r={id:Date.now()+'-'+Math.random().toString(36).slice(2,7),sid:S.sid,uid:UID,ts:new Date().toISOString(),child:db.child,item:S.i+1,prompt:it.show,target:it.say,attempt:S.att,level,heard:text,audio};
+ db.logs.push(r);save();cloud('attempts',{...r,audio:r.audio&&r.audio.length<150000?r.audio:''})}
+const praise=it=>it.tl==='zh-CN'?['真棒!','zh-CN']:['Great job!','en-US'];
+async function mic(){
+ const it=ITEMS[S.i];if(S.ph==='listen'){S.stop&&S.stop();return}
+ S.ph='listen';draw();
+ const r=await listen(it.tl);const heard=r.texts[0]||'';
+ if(!r.sr){S.ph='nosr';draw();return}
+ if(match(r.texts,it)){
+  const lv=S.att===1?'Đạt ngay':'Đạt sau khi nghe mẫu';
+  log(it,lv,heard,r.audio);S.res[S.i]={lv,ok:true,n:S.att};S.ph='pass';draw();
+  speakQ([praise(it),[it.say,it.tl]]);return}
+ if(S.att<MAXT){log(it,'Chưa chấm',heard,r.audio);S.att++;S.ph='hear';draw();sad(()=>speak(it.say,it.tl))}
+ else{log(it,'Đã cố gắng',heard,r.audio);S.res[S.i]={lv:'Đã cố gắng',ok:false,n:MAXT};S.ph='tried';draw();sad(()=>speak(it.say,it.tl))}}
+function next(){try{speechSynthesis.cancel()}catch(e){}if(S.i>=5){finishSess();S.scr='sum'}else{S.i++;S.att=1;S.ph='ask'}draw()}
+function tally(){const c=S.res.filter(r=>r&&r.ok===true).length,w=S.res.filter(r=>r&&r.ok===false).length;return{c,w,sk:S.res.filter(r=>r&&r.ok===null).length}}
+function finishSess(){const t=tally();const r={id:S.sid,uid:UID,child:db.child,ts:new Date().toISOString(),correct:t.c,wrong:t.w,other:6-t.c-t.w,items:S.res.map((x,k)=>({item:k+1,word:ITEMS[k].say,level:x?x.lv:'',tries:x?x.n:0}))};
+ db.sess.push(r);save();cloud('sessions',r)}
+function startAna(){const it=ITEMS[S.i];let t=[...it.say],s;do{s=t.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1])}while(s.join('')===it.say&&t.length>1);S.tiles=s;S.pick=[];S.ph='ana';draw()}
+function tap(k){if(S.pick.includes(k))return;S.pick.push(k);const it=ITEMS[S.i];if(S.pick.length===S.tiles.length){if(S.pick.map(x=>S.tiles[x]).join('')===it.say){log(it,'Chưa chấm','(ghép chữ)','');S.res[S.i]={lv:'Chưa chấm',ok:null,n:S.att};S.ph='anaok';speakQ([praise(it),[it.say,it.tl]])}else S.pick=[]}draw()}
+function unpick(){S.pick.pop();draw()}
+function again(){try{speechSynthesis.cancel()}catch(e){}S={scr:'play',i:0,att:1,ph:'ask',res:[],tiles:[],pick:[],stop:null,msg:'',sid:Date.now()+'-'+Math.random().toString(36).slice(2,6)};draw()}
+function begin(){ctx();getMic();const v=$('nm').value.trim();db.child=v||'Bé';save();S={scr:'play',i:0,att:1,ph:'ask',res:[],tiles:[],pick:[],stop:null,msg:'',sid:Date.now()+'-'+Math.random().toString(36).slice(2,6)};draw()}
+const stars=()=>S.res.filter(r=>r&&r.ok===true).length;
+function skip(){const it=ITEMS[S.i];log(it,'Chưa chấm','(bỏ qua - máy không nghe được)','');S.res[S.i]={lv:'Chưa chấm',ok:null,how:'skip',n:S.att};next()}
+const lab=it=>it.sl==='zh'?`<div><span class="tag">中</span><span style="font-size:54px;font-weight:800">${it.show}</span> <button class="btn sm" onclick="speak('${it.show}','zh-CN')">🔊</button><div class="py" style="font-size:22px">${it.spy}</div></div>`:`<div class="word"><span class="tag">EN</span>${esc(it.show)}</div>`;
+function draw(){const A=$('app');
+ if(S.scr==='start'){A.innerHTML=`<div class="c"><h1 style="font-size:36px">🎤 Luyện nói Anh – Trung</h1><p class="mute">6 mục · khoảng 5 phút · không tính giờ · mỗi lần nói tối đa 5 giây</p>${SR?'':'<p class="o" style="font-weight:800">⚠ Trình duyệt này chưa nghe được giọng nói. Hãy mở bằng Chrome để bé luyện nói.</p>'}<div class="card" style="flex-direction:column"><p class="say">Tên của con là gì?</p><input id="nm" placeholder="Tên con" value="${esc(db.child)}"><button class="btn go" onclick="begin()">Bắt đầu ▶</button></div>${ISADMIN?'<button class="btn sm" onclick="parent()">Quản trị viên</button>':''}</div>`;return}
+ if(S.scr==='par')return;
+ if(S.scr==='sum'){const t=tally();A.innerHTML=`<div class="c"><h1>⭐ ${stars()} / 6 <span class="g">太棒了!</span> <span style="color:var(--blue)">Well done!</span></h1><div class="bar"><span class="pill g">Nói được: ${t.c} câu</span><span class="pill o">Chưa đúng sau 3 lần: ${t.w} câu</span>${t.sk?`<span class="pill">Ghép chữ / chưa chấm: ${t.sk}</span>`:''}</div></div><div class="grid">${ITEMS.map((it,k)=>{const r=S.res[k]||{};return `<div class="it"><span class="st">${r.ok===false?'☆':r.ok===null?(r.how==='skip'?'–':'🔤'):'⭐'}</span><div style="font-size:40px">${it.pic}</div><div class="mute">${esc(it.show)}${it.spy?' ('+it.spy+')':''} →</div><b>${esc(it.say)}</b>${it.py?`<div class="py">${it.py}</div>`:''}<div class="${r.ok===false?'o':'g'}" style="font-weight:800">${r.ok===false?'Cần luyện thêm':r.ok===null?(r.how==='skip'?'Chưa chấm':'Ghép chữ'):'Nói đúng'+(r.n>1?' (lần '+r.n+')':'')}</div></div>`}).join('')}</div><div class="bar"><button class="btn go" onclick="again()">✓ Xong · chơi lại</button>${ISADMIN?'<button class="btn sm" onclick="parent()">Quản trị viên</button>':''}</div>`;return}
+ const it=ITEMS[S.i],ph=S.ph;
+ const dots=`<div class="dots">${ITEMS.map((_,k)=>`<i class="${k===S.i?'on':''} ${S.res[k]&&k<S.i?'ok':''}"></i>`).join('')}</div>`;
+ const top=`<div class="top">${dots}<span>Luyện nói · Mục ${S.i+1} / 6</span><span class="pill">⭐ ${stars()}</span></div>`;
+ const pic=`<div class="pic">${it.pic}<small>[${it.cap}]</small></div>`;
+ const arrow=`<div style="font-size:26px;color:var(--mute)">↓</div>`;
+ const slot=(c,t)=>`<div class="ans"><span class="lang">🎤 ${it.tl==='zh-CN'?'中文':'English'}</span><div class="slot ${c}">${t}</div></div>`;
+ const ans=`<div class="slot f" style="display:inline-flex;gap:14px"><span><span style="font-size:${it.py?44:38}px">${esc(it.say)}</span>${it.py?`<div class="py">${it.py}</div>`:''}</span><button class="btn sm" onclick="speak('${it.say}','${it.tl}')">🔊</button></div>`;
+ const model=`<button class="btn" onclick="speak('${it.say}','${it.tl}')">🔊 Nghe mẫu</button>`;
+ let side='',bar='';
+ if(ph==='ask'){side=lab(it)+arrow+slot('','?');bar=`<div><button class="mic" onclick="mic()">🎤</button><div class="cap">Bấm để nói</div></div><button class="btn sm" onclick="startAna()">▦ Chưa muốn nói? Ghép chữ</button>`}
+ else if(ph==='listen'){side=lab(it)+arrow+slot('o','• • •');bar=`<div><button class="mic rec" onclick="mic()">■</button><div class="cap">Đang nghe con… (tối đa 5 giây, bấm ■ khi nói xong)</div></div>`}
+ else if(ph==='hear'){side=`<div class="say o">☆ Nghe Tom nói nhé</div>${lab(it)}<div style="margin:12px 0">${ans}</div>`;bar=`<div><button class="mic" onclick="mic()">🎤</button><div class="cap">Nói lại · lần ${S.att} / ${MAXT}</div></div><button class="btn sm" onclick="startAna()">▦ Ghép chữ</button>`}
+ else if(ph==='pass'){const p=praise(it);side=`<div class="say g" style="font-size:36px">⭐ ${p[0]}</div>${lab(it)}<div style="margin-top:12px">${ans}</div>`;bar=model+`<button class="btn go" onclick="next()">Tiếp →</button>`}
+ else if(ph==='nosr'){side=lab(it)+`<p class="say o">Máy chưa nghe được con 🎧</p><p class="mute">Hãy mở bằng Chrome và cho phép dùng micro, rồi thử lại nhé.</p>`;bar=`<button class="btn go" onclick="S.ph='ask';draw()">🎤 Thử lại</button><button class="btn sm" onclick="startAna()">▦ Ghép chữ</button><button class="btn sm" onclick="skip()">Qua từ sau →</button>`}
+ else if(ph==='tried'){side=`<div class="say o">☆ Đã cố gắng!</div><p>Con cố gắng rất nhiều! Mình cùng sang từ tiếp theo nhé.</p>${lab(it)}<div style="margin-top:12px">${ans}</div>`;bar=model+`<button class="btn go" onclick="next()">Tiếp →</button>`}
+ else{const ok=ph==='anaok';side=lab(it)+`<p class="say ${ok?'g':''}">${ok?'⭐ '+praise(it)[0]:'Ghép chữ nhé!'}</p><div class="tiles">${[...it.say].map((_,k)=>`<div class="slot ${ok?'f':''}" style="min-width:56px;min-height:56px" onclick="${ok?'':'unpick()'}">${S.pick[k]!==undefined?esc(S.tiles[S.pick[k]]):'_'}</div>`).join('')}</div>${ok?(it.py?`<div class="py">${it.py}</div>`:''):`<div class="tiles">${S.tiles.map((c,k)=>`<button class="tile" ${S.pick.includes(k)?'disabled':''} onclick="tap(${k})">${esc(c)}</button>`).join('')}</div>`}`;bar=ok?model+`<button class="btn go" onclick="next()">Tiếp →</button>`:`<button class="btn sm" onclick="S.ph='ask';draw()">🎤 Con muốn nói</button>`}
+ A.innerHTML=top+`<div class="card">${pic}<div class="side">${side}</div></div><div class="bar">${bar}</div>`}
+let unsubs=[],CA=[],CS=[],ADMIN=false;
+async function parent(){if(!ISADMIN)return;S.scr='par';unsubs.forEach(f=>{try{f()}catch(e){}});unsubs=[];ADMIN=false;
+ try{ADMIN=!!(USER&&DB&&await USER.canEdit())}catch(e){}
+ if(ADMIN){const sub=(col,set)=>{try{unsubs.push(DB.collection(col).onSnapshot(sn=>{set(sn.docs.map(d=>d.data()));if(S.scr==='par')renderPar()},()=>{}))}catch(e){}};sub('attempts',v=>CA=v);sub('sessions',v=>CS=v)}
+ renderPar()}
+function renderPar(){const A=ADMIN?CA:db.logs,Sx=ADMIN?CS:db.sess;A.sort((a,b)=>(b.ts||'').localeCompare(a.ts||''));
+ const by={};Sx.forEach(s=>{const k=s.child||'?';const o=by[k]=by[k]||{n:0,c:0,w:0,last:''};o.n++;o.c+=s.correct;o.w+=s.wrong;if(s.ts>o.last)o.last=s.ts});
+ const cnt=k=>A.filter(l=>l.level===k).length;
+ $('app').innerHTML=`<h2>${ADMIN?'Bảng quản trị viên (tất cả học sinh)':'Phụ huynh (thiết bị này)'}</h2><p class="mute">${ADMIN?'Dữ liệu đồng bộ từ tất cả học sinh đã mở link này.':'Quản trị viên đăng nhập bằng tài khoản claude.ai của chủ trang sẽ thấy dữ liệu của mọi học sinh.'} Mức nội bộ không hiện cho con.</p>
+ <div class="bar" style="justify-content:flex-start"><span class="pill">Đạt ngay: ${cnt('Đạt ngay')}</span><span class="pill">Đạt sau khi nghe mẫu: ${cnt('Đạt sau khi nghe mẫu')}</span><span class="pill">Đã cố gắng: ${cnt('Đã cố gắng')}</span><span class="pill">Chưa chấm: ${cnt('Chưa chấm')}</span></div>
+ <div class="bar" style="justify-content:flex-start"><button class="btn sm" onclick="unsubs.forEach(f=>f());S.scr='start';draw()">← Quay lại</button><button class="btn sm" onclick="csv()">⬇ Xuất CSV</button>${ADMIN?'':`<button class="btn sm or" onclick="if(confirm('Xóa lịch sử trên thiết bị này?')){db.logs=[];db.sess=[];save();parent()}">Xóa</button>`}</div>
+ <h3>Từng học sinh</h3><table><tr><th>Học sinh</th><th>Số bài</th><th>Câu nói được</th><th>Câu sai (3 lần)</th><th>Lần cuối</th></tr>${Object.keys(by).map(k=>`<tr><td>${esc(k)}</td><td>${by[k].n}</td><td>${by[k].c}</td><td>${by[k].w}</td><td>${new Date(by[k].last).toLocaleString('vi-VN')}</td></tr>`).join('')||'<tr><td colspan="5">Chưa có bài nào hoàn thành.</td></tr>'}</table>
+ <h3>Chi tiết từng lượt nói</h3><table><tr><th>Giờ</th><th>Học sinh</th><th>Mục</th><th>Lượt</th><th>Mức</th><th>Máy nghe được</th><th>Nghe lại</th></tr>${A.map(l=>`<tr><td>${new Date(l.ts).toLocaleString('vi-VN')}</td><td>${esc(l.child)}</td><td>${l.item}. ${esc(l.prompt)}→${esc(l.target)}</td><td>${l.attempt}</td><td>${esc(l.level)}</td><td>${esc(l.heard||'—')}</td><td>${l.audio?`<audio controls src="${l.audio}" style="height:30px"></audio>`:'—'}</td></tr>`).join('')||'<tr><td colspan="7">Chưa có lượt nói nào.</td></tr>'}</table>`}
+function csv(){const A=ADMIN?CA:db.logs;const rows=[['time','child','item','prompt','target','attempt','level','heard']].concat(A.map(l=>[l.ts,l.child,l.item,l.prompt,l.target,l.attempt,l.level,l.heard]));
+ const t='\ufeff'+rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(t);a.download='luyen-noi.csv';a.click()}
+(async()=>{try{const p=await navigator.permissions.query({name:'microphone'});if(p.state==='granted')await getMic();p.onchange=()=>{if(p.state==='granted')getMic()}}catch(e){try{if(localStorage.getItem('micOK'))getMic()}catch(_){}}})();
+draw();
+</script></body></html>
